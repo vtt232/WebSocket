@@ -24,8 +24,8 @@ public class MessageController {
 
     @PostMapping(path="/announce", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Boolean> announceNewAdmin(@RequestBody WebSocketAnnouncementDTO webSocketAnnouncementDTO) {
-        System.out.println(webSocketAnnouncementDTO.getReceiver());
-        System.out.println(webSocketAnnouncementDTO.getServerEvent());
+        log.info("Send message to " + webSocketAnnouncementDTO.getReceiver());
+        log.info("The event type is " + webSocketAnnouncementDTO.getServerEvent());
         webSocketService.sendMessage(webSocketAnnouncementDTO);
         return ResponseEntity.ok(true);
     }
