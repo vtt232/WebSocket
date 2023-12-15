@@ -1,6 +1,8 @@
 package com.example.WebSocket.Config;
 
+import com.example.WebSocket.DTO.SystemStatisticsDTO;
 import com.example.WebSocket.DTO.WebSocketAnnouncementDTO;
+import com.example.WebSocket.Deserializer.SystemStatisticsDeserializer;
 import com.example.WebSocket.Deserializer.WebsocketAnnouncementDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,6 +16,7 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +33,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, WebsocketAnnouncementDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         return props;
     }
 
@@ -46,5 +50,6 @@ public class KafkaConsumerConfig {
         listenerFactory.setConsumerFactory(consumerFactory);
         return listenerFactory;
     }
+
 
 }

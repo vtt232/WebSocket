@@ -1,5 +1,6 @@
 package com.example.WebSocket.Kafka;
 
+import com.example.WebSocket.DTO.SystemStatisticsDTO;
 import com.example.WebSocket.DTO.WebSocketAnnouncementDTO;
 import com.example.WebSocket.Service.WebSocketService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +19,10 @@ public class KafkaListeners {
 
 
     @KafkaListener(topics = "admin", groupId = "groupId")
-    void listener(WebSocketAnnouncementDTO webSocketAnnouncementDTO){
+    void listenerAdminTopic(WebSocketAnnouncementDTO webSocketAnnouncementDTO){
         log.info("Send message to " + webSocketAnnouncementDTO.getReceiver());
         log.info("The event type is " + webSocketAnnouncementDTO.getServerEvent());
         webSocketService.sendMessage(webSocketAnnouncementDTO);
     }
+
 }

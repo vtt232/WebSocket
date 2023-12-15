@@ -1,5 +1,6 @@
 package com.example.WebSocket.Service.Impl;
 
+import com.example.WebSocket.DTO.SystemStatisticsDTO;
 import com.example.WebSocket.DTO.WebSocketAnnouncementDTO;
 import com.example.WebSocket.Service.WebSocketService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,16 @@ public class WebSocketServiceImpl implements WebSocketService {
         messagingTemplate.convertAndSend(
                 "/queue/notify",
                 webSocketAnnouncementDTO
+        );
+    }
+
+    @Override
+    public void sendSystemStatistics(SystemStatisticsDTO systemStatisticsDTO) {
+
+        log.info("Send system infor "+systemStatisticsDTO.toString());
+        messagingTemplate.convertAndSend(
+                "/queue/system_infor",
+                systemStatisticsDTO
         );
     }
 
